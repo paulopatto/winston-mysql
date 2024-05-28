@@ -8,8 +8,8 @@ const winstonMysql = require('../lib/mysql_transport');
 //test config for database, you can change it with your configuration.
 const options_default = {
     host: 'localhost',
-    user: 'logger',
-    password: 'logger*test',
+    user: 'root',
+    password: 'root',
     database: 'WinstonTest',
     table: 'sys_logs_default'
 };
@@ -17,18 +17,18 @@ const options_default = {
 //custom log table fields
 const options_custom = {
     host: 'localhost',
-    user: 'logger',
-    password: 'logger*test',
+    user: 'root',
+    password: 'root',
     database: 'WinstonTest',
     table: 'sys_logs_custom',
-    fields: {level: 'mylevel', meta: 'metadata', message: 'source', timestamp: 'addDate'}
+    fields: {level: 'mylevel', meta: 'metadata', message: 'source', timestamp: 'addDate', station_id: 'station_id'}
 };
 
 //meta json log table fields
 const options_json = {
     host: 'localhost',
-    user: 'logger',
-    password: 'logger*test',
+    user: 'root',
+    password: 'root',
     database: 'WinstonTest',
     table: 'sys_logs_json'
 };
@@ -65,7 +65,6 @@ describe('Test MySQL transport for winston', async function () {
         });
 
         await it('always pass', async function (done) {
-
             try {
                 const logger = winston.createLogger({
                     level: 'debug',
@@ -81,10 +80,10 @@ describe('Test MySQL transport for winston', async function () {
                 const rnd = Math.floor(Math.random() * 1000);
                 const msg = `test message ${rnd}`;
 
-                logger.debug(msg, {message: msg, type: 'demo'});
-                logger.error(msg, {message: msg, type: 'demo'});
-                logger.info(msg, {message: msg, type: 'demo'});
-                logger.warn(msg, {message: msg, type: 'demo'});
+                logger.debug(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.error(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.info(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.warn(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
 
                 done();
 
@@ -127,10 +126,10 @@ describe('Test MySQL transport for winston', async function () {
                 const rnd = Math.floor(Math.random() * 1000);
                 const msg = `test message ${rnd}`;
 
-                logger.debug(msg, {message: msg, type: 'demo'});
-                logger.error(msg, {message: msg, type: 'demo'});
-                logger.info(msg, {message: msg, type: 'demo'});
-                logger.warn(msg, {message: msg, type: 'demo'});
+                logger.debug(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.error(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.info(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.warn(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
 
                 done();
 
@@ -174,10 +173,10 @@ describe('Test MySQL transport for winston', async function () {
                 const rnd = Math.floor(Math.random() * 1000);
                 const msg = `test message ${rnd}`;
 
-                logger.debug(msg, {message: msg, type: 'demo'});
-                logger.error(msg, {message: msg, type: 'demo'});
-                logger.info(msg, {message: msg, type: 'demo'});
-                logger.warn(msg, {message: msg, type: 'demo'});
+                logger.debug(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.error(msg, {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.info(msg,  {message: msg, type: 'demo', station_id: 'XPTO#1234'});
+                logger.warn(msg,  {message: msg, type: 'demo', station_id: 'XPTO#1234'});
                 done();
 
             } catch (err) {
